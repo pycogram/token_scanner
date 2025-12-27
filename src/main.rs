@@ -35,7 +35,7 @@ async fn main() {
     loop {
         println!("⏱ Starting reward cycle...");
 
-        // 1️⃣ Fetch holders
+        // Fetch holders
         let mut eligible_holders: Vec<Holder> = fetch_holders().await;
         eligible_holders.retain(|h| h.is_eligible());
 
@@ -45,7 +45,7 @@ async fn main() {
             continue;
         }
 
-        // 2️⃣ Shuffle & select winners
+        // Shuffle & select winners
         shuffle_vec(&mut eligible_holders);
         let winner_count =
             (eligible_holders.len() as f64 * WINNER_PERCENTAGE).ceil() as usize;
@@ -53,7 +53,7 @@ async fn main() {
         let mut winners: Vec<Holder> =
             eligible_holders.into_iter().take(winner_count).collect();
 
-        // 3️⃣ Prevent repeated winners
+        // Prevent repeated winners
         {
             let json = winners_json.lock().await;
             winners = limit_previous_winners(winners, &json, MAX_PREV_WINNER_RATIO);
@@ -65,7 +65,7 @@ async fn main() {
             continue;
         }
 
-        // 4️⃣ Fetch fees
+        // Fetch fees
         let total_fees = fetch_total_fees().await;
         if total_fees == 0 {
             println!("⚠️ No fees collected.");
@@ -73,13 +73,13 @@ async fn main() {
             continue;
         }
 
-        // 5️⃣ Distribute
+        // Distribute
         let winner_wallets: Vec<String> =
             winners.iter().map(|h| h.wallet.clone()).collect();
 
         distribute_fees(total_fees, &winner_wallets).await;
 
-        // 6️⃣ Save winners
+        // Save winners
         let now = Utc::now();
         {
             let mut json = winners_json.lock().await;
@@ -93,7 +93,7 @@ async fn main() {
             save_winners_json(WINNERS_JSON_PATH, &json).await;
         }
 
-        // 7️⃣ Notify
+        // Notify
         send_telegram_message(&winners).await;
 
         println!("✅ Cycle complete. Sleeping {} hours...", CYCLE_HOURS);
