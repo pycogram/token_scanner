@@ -50,10 +50,10 @@ pub async fn save_winners_json(path: &str, data: &WinnersJson) {
     match serde_json::to_string_pretty(data) {
         Ok(content) => {
             if let Err(e) = fs::write(path, content).await {
-                eprintln!("⚠️ Failed to save winners JSON: {}", e);
+                eprintln!("Failed to save winners JSON: {}", e);
             }
         }
-        Err(e) => eprintln!("⚠️ Failed to serialize winners JSON: {}", e),
+        Err(e) => eprintln!("Failed to serialize winners JSON: {}", e),
     }
 }
 

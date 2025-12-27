@@ -26,7 +26,7 @@ pub fn load_dev_keypair() -> Keypair {
 /// Send SOL (in lamports) from dev wallet to a recipient
 pub fn send_sol(client: &RpcClient, recipient: &str, lamports: u64) -> Result<String, Box<dyn std::error::Error>> {
     if lamports == 0 {
-        println!("⚠️ Skipping 0 lamports transfer to {}", recipient);
+        println!("Skipping 0 lamports transfer to {}", recipient);
         return Ok("Skipped".to_string());
     }
 
@@ -44,6 +44,6 @@ pub fn send_sol(client: &RpcClient, recipient: &str, lamports: u64) -> Result<St
     );
 
     let signature = client.send_and_confirm_transaction(&tx)?;
-    println!("💸 Sent {} lamports to {} | Tx: {}", lamports, recipient, signature);
+    println!("Sent {} lamports to {} | Tx: {}", lamports, recipient, signature);
     Ok(signature.to_string())
 }

@@ -9,7 +9,7 @@ const TELEGRAM_MAX_LEN: usize = 4000;
 /// Send Telegram message to announce winners
 pub async fn send_telegram_message(winners: &[Holder]) {
     if winners.is_empty() {
-        println!("ℹ️ No winners to notify via Telegram.");
+        println!("No winners to notify via Telegram.");
         return;
     }
 
@@ -35,5 +35,5 @@ pub async fn send_telegram_message(winners: &[Holder]) {
         }
     }
 
-    println!("✅ Telegram notification sent for {} winners", winners.len());
+    println!("Telegram notification sent for {} winners", winners.len());
 }
