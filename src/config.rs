@@ -2,7 +2,7 @@ use std::env;
 
 pub const MINT_ADDRESS: &str = "EfbzT4kuMLNpwQExZkrKyMaF5Cf8g1DaMeFgmQq3pump";
 
-pub const MINIMUM_UI_AMOUNT: f64 = 2_000_000.0; // 2 million tokens
+pub const MINIMUM_UI_AMOUNT: f64 = 2_000_000.0; 
 
 /// Get the Solana RPC URL from environment or use default
 pub fn get_rpc_url() -> String {
