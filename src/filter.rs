@@ -1,6 +1,6 @@
 use crate::types::TokenHolder;
 
-/// Filter holders by minimum UI amount (considering decimals)
+/// Filter holders by minimum UI amt (considering decimals)
 pub fn filter_by_minimum_ui_amount(
     holders: Vec<TokenHolder>,
     minimum_ui_amount: f64,
